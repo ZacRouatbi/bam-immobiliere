@@ -45,7 +45,7 @@ export default function Navbar() {
             alt="BAM Immobilière"
             width={110}
             height={55}
-            className={`object-contain h-10 w-auto transition-all duration-500 ${transparent ? "brightness-0 invert" : ""}`}
+            className={`object-contain h-12 w-auto transition-all duration-500 ${transparent ? "brightness-0 invert" : ""}`}
           />
         </Link>
 
