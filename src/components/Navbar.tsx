@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const links = [
   { href: "/", label: "Accueil" },
   { href: "/a-propos", label: "À Propos" },
-  { href: "/services", label: "Services" },
+  { href: "/projets-en-cours", label: "Projets en Cours" },
   { href: "/projets-realises", label: "Projets Réalisés" },
   { href: "/contact", label: "Contact" },
 ];
@@ -18,7 +18,6 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  const isHome = pathname === "/";
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 50);
@@ -27,7 +26,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  const transparent = isHome && !scrolled;
+  const transparent = !scrolled;
 
   return (
     <header

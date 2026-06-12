@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, ChevronRight } from "lucide-react";
 import Reveal from "@/components/Reveal";
+import PartnerCarousel from "@/components/PartnerCarousel";
 import { slideLeft, slideRight, scaleReveal, staggerContainer, cardLift, lineGrow, countUp } from "@/lib/motion";
 
 const amenities = [
@@ -355,7 +356,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── SERVICES ── */}
+{/* SERVICES ── */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-8">
           <div className="mb-14 text-center">
@@ -394,32 +395,30 @@ export default function HomePage() {
           </motion.div>
         </div>
       </section>
+                  {/* PARTNERS CAROUSEL */}
+      <PartnerCarousel />
+      {/* CONTACT CTA - Vous avez un projet ? */}
+      <section className="bg-stone-50 py-20">
+        <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
+          <Reveal variants={scaleReveal} className="relative h-72 lg:h-auto min-h-[280px]">
+            <Image src="/images/entree-01.jpg" alt="Entrée principale" fill className="object-cover" />
+          </Reveal>
+          <Reveal variants={slideRight} className="bg-[#C49572]/10 p-12 lg:p-16 flex flex-col justify-center">
+            <p className="text-[#AB7A51] text-[11px] uppercase tracking-[0.3em] font-semibold mb-5">Vous avez un projet ?</p>
+            <h2 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }} className="text-4xl font-light text-stone-900 mb-5 leading-tight">
+              Parlons-en dès maintenant.
+            </h2>
+            <p className="text-stone-600 text-[13px] leading-relaxed mb-8">
+              Contactez notre équipe commerciale pour une présentation personnalisée, un plan ou une simulation de financement.
+            </p>
+            <Link href="/contact" className="inline-flex items-center gap-3 bg-[#AB7A51] hover:bg-[#966840] text-white text-[12px] font-semibold tracking-widest uppercase px-7 py-4 transition-colors duration-300">
+              Demander un Devis <ArrowRight size={14} />
+            </Link>
+          </Reveal>
+        </div>
+      </section>
 
-{/* ── CONTACT CTA ── */}
-       <section className="bg-stone-50 py-20">
-         <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
-           <Reveal variants={scaleReveal} className="relative h-72 lg:h-auto min-h-[280px]">
-             <Image src="/images/entree-01.jpg" alt="Entrée principale" fill className="object-cover" />
-           </Reveal>
-           <Reveal variants={slideRight} className="bg-[#C49572]/10 p-12 lg:p-16 flex flex-col justify-center">
-             <p className="text-[#AB7A51] text-[11px] uppercase tracking-[0.3em] font-semibold mb-5">Intéressé ?</p>
-             <h2 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }} className="text-4xl font-light text-stone-900 mb-5 leading-tight">
-               Réservez votre<br />appartement.
-             </h2>
-             <p className="text-stone-600 text-[13px] leading-relaxed mb-8">
-               Contactez notre équipe commerciale pour une présentation personnalisée, un plan ou une simulation de financement.
-             </p>
-             <div className="flex flex-col gap-3">
-               <Link href="/contact" className="inline-flex items-center gap-3 bg-[#AB7A51] hover:bg-[#966840] text-white text-[12px] font-semibold tracking-widest uppercase px-7 py-4 transition-colors duration-300">
-                 Prendre Rendez-vous <ArrowRight size={14} />
-               </Link>
-               <a href="tel:+21671968020" className="inline-flex items-center gap-3 border border-stone-300 hover:border-[#AB7A51] text-stone-600 hover:text-stone-900 text-[12px] font-semibold tracking-widest uppercase px-7 py-4 transition-colors duration-300">
-                 +216 71 96 80 20
-               </a>
-             </div>
-           </Reveal>
-         </div>
-       </section>
+
     </>
   );
 }
@@ -439,46 +438,46 @@ function VideoSection() {
         transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
       />
 
-{/* Video — autoplay muted loop */}
-        <div className="relative h-[80vh] min-h-[560px] overflow-hidden">
-         <motion.video
-           ref={videoRef}
-           src="/bam-showreel.mp4"
-           autoPlay
-           muted
-           loop
-           playsInline
-           className="w-full h-full object-cover"
-           initial={{ scale: 1.06, opacity: 0 }}
-           whileInView={{ scale: 1, opacity: 1 }}
-           viewport={{ once: true }}
-           transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
-         />
-         {/* Warm overlay */}
-         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-         <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/30 pointer-events-none" />
+      {/* Video — autoplay muted loop */}
+      <div className="relative h-[80vh] min-h-[560px] overflow-hidden">
+        <motion.video
+          ref={videoRef}
+          src="/bam-showreel.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover"
+          initial={{ scale: 1.06, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
+        />
+        {/* Warm overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/30 pointer-events-none" />
 
-         {/* Overlay content */}
-         <div className="absolute inset-0 flex items-end px-8 md:px-16 pb-14 pointer-events-none">
-           <div className="flex items-end justify-between w-full">
-             <motion.div
-               initial={{ opacity: 0, y: 30 }}
-               whileInView={{ opacity: 1, y: 0 }}
-               viewport={{ once: true }}
-               transition={{ duration: 0.9, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-             >
-               <p className="text-[#AB7A51] text-[11px] uppercase tracking-[0.3em] font-semibold mb-3">Showreel</p>
-               <h2
-                 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
-                 className="text-4xl md:text-6xl font-light text-white leading-tight max-w-xl"
-               >
-                 BAM Immobilière<br />
-                 <em className="not-italic text-[#C49572]">en mouvement.</em>
-               </h2>
-             </motion.div>
-           </div>
-         </div>
-       </div>
+        {/* Overlay content */}
+        <div className="absolute inset-0 flex items-end px-8 md:px-16 pb-14 pointer-events-none">
+          <div className="flex items-end justify-between w-full">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.9, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <p className="text-[#AB7A51] text-[11px] uppercase tracking-[0.3em] font-semibold mb-3">Showreel</p>
+              <h2
+                style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+                className="text-4xl md:text-6xl font-light text-white leading-tight max-w-xl"
+              >
+                BAM Immobilière<br />
+                <em className="not-italic text-[#C49572]">en mouvement.</em>
+              </h2>
+            </motion.div>
+          </div>
+          </div>
+        </div>
 
       {/* Bottom architectural rule */}
       <motion.div

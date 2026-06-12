@@ -5,23 +5,7 @@ import { MapPin, Phone, Mail, Clock, Globe, AtSign, Link2 } from "lucide-react";
 export default function Footer() {
   return (
     <footer className="bg-[#0F0C42] text-white/60">
-      {/* CTA band */}
-      <div className="border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-8 py-14 flex flex-col md:flex-row items-center justify-between gap-8">
-          <div>
-            <p className="text-[#AB7A51] text-[11px] uppercase tracking-[0.25em] font-semibold mb-2">Vous avez un projet ?</p>
-            <h3 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }} className="text-white text-4xl font-light">
-              Parlons-en dès maintenant.
-            </h3>
-          </div>
-          <Link
-            href="/contact"
-            className="flex-shrink-0 border border-[#AB7A51] text-[#AB7A51] hover:bg-[#AB7A51] hover:text-white text-[12px] font-semibold tracking-[0.2em] uppercase px-8 py-3.5 transition-colors duration-300"
-          >
-            Demander un Devis →
-          </Link>
-        </div>
-      </div>
+      
 
       <div className="max-w-7xl mx-auto px-8 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
         <div className="lg:col-span-1">
@@ -41,10 +25,10 @@ export default function Footer() {
         <div>
           <p className="text-white text-[11px] uppercase tracking-[0.2em] font-semibold mb-6">Navigation</p>
           <ul className="space-y-3">
-            {["/", "/a-propos", "/services", "/projets-realises", "/contact"].map((href, i) => (
+            {["/", "/a-propos", "/projets-en-cours", "/projets-realises", "/contact"].map((href, i) => (
               <li key={href}>
                 <Link href={href} className="text-[13px] text-white/40 hover:text-[#AB7A51] transition-colors duration-200">
-                  {["Accueil", "À Propos", "Services", "Projets Réalisés", "Contact"][i]}
+                  {["Accueil", "À Propos", "Projets en Cours", "Projets Réalisés", "Contact"][i]}
                 </Link>
               </li>
             ))}
@@ -64,9 +48,9 @@ export default function Footer() {
           <p className="text-white text-[11px] uppercase tracking-[0.2em] font-semibold mb-6">Contact</p>
           <ul className="space-y-4">
             {[
-              { Icon: MapPin, text: "28 Rue du Lac, Les Berges du Lac, 1053 Tunis" },
-              { Icon: Phone, text: "+216 71 96 80 20", href: "tel:+21671968020" },
-              { Icon: Mail, text: "contact@bam.tn", href: "mailto:contact@bam.tn" },
+              { Icon: MapPin, text: "Sahloul 4, Sousse" },
+              { Icon: Phone, text: "+216 24 205 201", href: "tel:+21624205201" },
+              { Icon: Mail, text: "info@bamimmobiliere.com", href: "mailto:info@bamimmobiliere.com" },
               { Icon: Clock, text: "Lun–Ven: 8h00–17h30" },
             ].map(({ Icon, text, href }, i) => (
               <li key={i} className="flex gap-3">

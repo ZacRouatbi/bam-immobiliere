@@ -1,11 +1,9 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Reveal from "@/components/Reveal";
-import { staggerContainer, cardLift, lineGrow, fadeUp } from "@/lib/motion";
 
 const categories = ["Tous", "Extérieur", "Intérieur", "Jardins", "Sport & Loisirs"];
 
@@ -161,26 +159,9 @@ export default function ProjetsRealisesPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-24 bg-[#0F0C42] text-center relative overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.04] pointer-events-none">
-          {[...Array(6)].map((_, i) => (
-            <div key={i} className="absolute top-0 bottom-0 w-px bg-white" style={{ left: `${(i + 1) * (100 / 7)}%` }} />
-          ))}
-        </div>
-        <div className="relative max-w-2xl mx-auto px-8">
-          <Reveal>
-            <p className="text-[#AB7A51] text-[11px] uppercase tracking-[0.3em] font-semibold mb-4">Votre Projet</p>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }} className="text-4xl md:text-5xl font-light text-white mb-8">
-              Le prochain projet sur cette page,<br />
-              <em className="not-italic text-[#C49572]">c&apos;est le vôtre.</em>
-            </h2>
-            <Link href="/contact" className="inline-flex items-center gap-3 bg-[#AB7A51] hover:bg-[#966840] text-white text-[12px] font-semibold tracking-widest uppercase px-10 py-4 transition-colors duration-300">
-              Parler de mon projet <ArrowRight size={14} />
-            </Link>
-          </Reveal>
-        </div>
-      </section>
+      
     </>
   );
 }
+
+
