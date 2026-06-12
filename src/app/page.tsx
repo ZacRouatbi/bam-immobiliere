@@ -439,10 +439,12 @@ function VideoSection() {
       />
 
       {/* Video — autoplay muted loop */}
-      <div className="relative h-[80vh] min-h-[560px] overflow-hidden">
+      <div className="relative h-[85vh] min-h-[600px] md:min-h-[680px] overflow-hidden">
         <motion.video
           ref={videoRef}
           src="/bam-showreel.mp4"
+          poster="/images/facade-principale.png"
+          preload="metadata"
           autoPlay
           muted
           loop
