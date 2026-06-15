@@ -45,11 +45,10 @@ export default function ContactPage() {
 
   const sendEmail = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
 
     const result = contactSchema.safeParse(formData);
     
-if (!result.success) {
+    if (!result.success) {
       const fieldErrors: Record<string, string> = {};
       result.error.issues.forEach((issue) => {
         if (issue.path[0]) {
@@ -59,6 +58,8 @@ if (!result.success) {
       setErrors(fieldErrors);
       return;
     }
+
+    setLoading(true);
 
     const templateParams = {
       name: `${formData.nom} ${formData.prenom}`,
