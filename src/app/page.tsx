@@ -7,12 +7,14 @@ import { ArrowRight, ChevronRight } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import PartnerCarousel from "@/components/PartnerCarousel";
 import { slideLeft, slideRight, scaleReveal, staggerContainer, cardLift, lineGrow, countUp } from "@/lib/motion";
+import { Users, Award, Target, Heart } from "lucide-react";
 
 const amenities = [
-  { img: "/images/piscine.jpeg",   label: "Bassin & Jardins",   desc: "Espace aquatique et jardins paysagés en cœur de résidence." },
-  { img: "/images/hall-01.jpg",    label: "Hall de Réception",   desc: "Lobby marbré avec accueil concierge 24h/24." },
-  { img: "/images/sport-01.jpg",   label: "Salle de Sport",      desc: "Équipements fitness dernière génération." },
-  { img: "/images/jardin-01.png",  label: "Espaces Verts",       desc: "Terrasses jardins et couloirs végétalisés." },
+  { img: "/Construction.png", label: "Construction", desc: "Gros œuvre et travaux de construction avec des matériaux de haute qualité." },
+  { img: "/Architecture.png", label: "Architecture", desc: "Conception architecturale sur mesure pour des espaces uniques et fonctionnels." },
+  { img: "/Promotion immobiliére.png", label: "Promotion Immobilière", desc: "Promotion et vente de biens immobiliers neufs et résidentiels." },
+  { img: "/Gestion et conseil.png", label: "Gestion & Conseil", desc: "Conseil en gestion immobilière et optimisation de votre patrimoine." },
+  { img: "/Livraison clé a main.png", label: "Livraison Clé en Main", desc: "Livraison complète et prête à l'emménagement de vos espaces." },
 ];
 
 const apartments = [
@@ -26,6 +28,20 @@ const stats = [
   { n: "+20",  l: "Ans d'Expérience" },
   { n: "+300", l: "Clients Satisfaits" },
   { n: "+40",  l: "Partenaires" },
+];
+
+const values = [
+  { icon: Award,  title: "Excellence",    desc: "Nous visons l'excellence dans chaque détail de nos réalisations, des matériaux choisis aux finitions livrées." },
+  { icon: Heart,  title: "Intégrité",     desc: "Nous agissons avec transparence, honnêteté et respect envers nos clients, partenaires et équipes." },
+  { icon: Target, title: "Engagement",   desc: "Nous nous engageons pleinement pour la réussite de vos projets, dans les délais et budgets convenus." },
+  { icon: Users,  title: "Collaboration", desc: "Nous travaillons main dans la main avec nos clients pour construire des espaces qui leur ressemblent." },
+];
+
+const team = [
+  { name: "Anis Belhadj",     role: "Directeur Général",        img: "/images/hall-04.jpg" },
+  { name: "Sonia Mansour",    role: "Directrice Architecture",   img: "/images/hall-05.jpg" },
+  { name: "Karim Trabelsi",   role: "Chef de Projet Senior",     img: "/images/hall-06.jpg" },
+  { name: "Leila Baccouche",  role: "Responsable Commerciale",   img: "/images/hall-02.jpg" },
 ];
 
 export default function HomePage() {
@@ -62,7 +78,7 @@ export default function HomePage() {
               transition={{ duration: 2, repeat: Infinity }}
               className="w-1.5 h-1.5 rounded-full bg-[#AB7A51]"
             />
-            <span className="text-white text-[11px] tracking-[0.25em] uppercase font-medium">BAM Immobilière · Tunis</span>
+            <span className="text-white text-[11px] tracking-[0.25em] uppercase font-medium">BAM Immobilière · Sousse</span>
           </div>
         </motion.div>
 
@@ -77,7 +93,7 @@ export default function HomePage() {
             transition={{ duration: 0.7, delay: 0.5 }}
             className="text-[#AB7A51] text-[11px] uppercase tracking-[0.35em] font-semibold mb-5"
           >
-            Résidence Radhia IV
+            BAM Immobilière
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 50 }}
@@ -86,8 +102,8 @@ export default function HomePage() {
             style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
             className="text-6xl md:text-8xl font-light text-white leading-[0.92] mb-6 max-w-3xl"
           >
-            Une adresse<br />
-            <em className="not-italic text-[#C49572]">d&apos;exception.</em>
+            Construire<br />
+            <em className="not-italic text-[#C49572]">l&apos;avenir.</em>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -95,7 +111,7 @@ export default function HomePage() {
             transition={{ duration: 0.8, delay: 0.9 }}
             className="text-white/65 text-base max-w-md leading-relaxed mb-10"
           >
-            Appartements haut standing à Tunis — finitions luxueuses, services premium, architecture contemporaine.
+            Promoteur immobilier de référence en Tunisie depuis plus de 20 ans. Qualité, transparence et excellence au cœur de chaque projet.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -104,7 +120,7 @@ export default function HomePage() {
             className="flex flex-wrap gap-4"
           >
             <Link href="/projets-realises" className="inline-flex items-center gap-3 bg-[#AB7A51] hover:bg-[#966840] text-white text-[12px] font-semibold tracking-widest uppercase px-8 py-4 transition-colors duration-300">
-              Découvrir le projet <ArrowRight size={14} />
+              Nos Projets <ArrowRight size={14} />
             </Link>
             <Link href="/contact" className="inline-flex items-center gap-3 border border-white/40 hover:border-white text-white text-[12px] font-semibold tracking-widest uppercase px-8 py-4 transition-colors duration-300">
               Nous Contacter
@@ -146,79 +162,196 @@ export default function HomePage() {
         </motion.div>
       </section>
 
-      {/* ── PROJECT INTRO ── */}
+      {/* ── MISSION ── */}
       <section className="py-28 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <Reveal variants={slideLeft}>
-            <p className="text-[#AB7A51] text-[11px] uppercase tracking-[0.3em] font-semibold mb-5">Notre Projet Phare</p>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }} className="text-5xl md:text-6xl font-light text-stone-900 leading-[1.05] mb-7">
-              Résidence<br />Radhia IV
+            <p className="text-[#AB7A51] text-[11px] uppercase tracking-[0.3em] font-semibold mb-5">Notre Mission</p>
+            <h2 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }} className="text-4xl md:text-5xl font-light text-stone-900 leading-tight mb-5">
+              Créer de la valeur durable<br />à travers des projets bien conçus et bien réalisés.
             </h2>
-            {/* Animated rule */}
-            <motion.div
-              variants={lineGrow}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="h-px bg-[#AB7A51] w-16 mb-7"
-            />
+            <motion.div variants={lineGrow} initial="hidden" whileInView="visible" viewport={{ once: true }} className="h-px bg-[#AB7A51] w-16 mb-7" />
             <p className="text-stone-500 leading-relaxed mb-5">
-              Implantée au cœur d&apos;un quartier prisé de Tunis, la Résidence Radhia IV incarne une nouvelle vision du vivre haut de gamme. Architecture contemporaine, matériaux nobles et services de prestige définissent chaque détail de cet immeuble R+7.
+              Fondée il y a plus de 20 ans, BAM Immobilière s&apos;est imposée comme un acteur incontournable de la promotion immobilière en Tunisie. Notre mission est de concevoir et construire des espaces qui répondent aux besoins d&apos;aujourd&apos;hui tout en anticipant ceux de demain.
             </p>
             <p className="text-stone-500 leading-relaxed mb-10">
-              Des appartements S+1 au S+3 pensés pour maximiser la lumière naturelle, avec des espaces communs d&apos;exception — hall marbré avec concierge, salle de sport, jardins et bassin privatifs.
+              Chaque projet que nous réalisons est le fruit d&apos;une collaboration étroite entre nos équipes d&apos;experts, nos partenaires et nos clients, dans un esprit de rigueur, d&apos;innovation et de respect des délais.
             </p>
-            <div className="grid grid-cols-3 gap-6 pt-8 border-t border-stone-100">
-              {[{ n: "R+7", l: "Niveaux" }, { n: "3", l: "Typologies" }, { n: "2026", l: "Livraison" }].map((v, i) => (
+            <div className="grid grid-cols-2 gap-6 pt-8 border-t border-stone-100">
+              {["+150 projets", "+20 ans", "+300 clients", "+40 partenaires"].map((s, i) => (
                 <motion.div
-                  key={v.l}
+                  key={s}
                   initial={{ opacity: 0, y: 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.5 + i * 0.12, ease: [0.22,1,0.36,1] }}
+                  transition={{ duration: 0.6, delay: 0.3 + i * 0.1 }}
                 >
-                  <p style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }} className="text-3xl font-light text-[#AB7A51] mb-1">{v.n}</p>
-                  <p className="text-stone-400 text-[11px] uppercase tracking-widest">{v.l}</p>
+                  <p style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }} className="text-3xl font-light text-[#AB7A51]">{s.split(" ")[0]}</p>
+                  <p className="text-stone-400 text-[11px] uppercase tracking-widest">{s.split(" ").slice(1).join(" ")}</p>
                 </motion.div>
               ))}
             </div>
           </Reveal>
 
-          <Reveal variants={slideRight} className="relative h-[540px]">
-            <div className="absolute inset-0 overflow-hidden">
-              <motion.div
-                className="absolute inset-0"
-                initial={{ scale: 1.08 }}
-                whileInView={{ scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <Image src="/images/nuit-01.png" alt="Résidence de nuit" fill className="object-cover object-center" />
-              </motion.div>
-            </div>
-            {/* Float-in card */}
+          <Reveal variants={slideRight} className="relative h-[500px]">
             <motion.div
-              initial={{ opacity: 0, x: -30, y: 30 }}
+              className="absolute inset-0 overflow-hidden"
+              initial={{ scale: 1.08 }}
+              whileInView={{ scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <Image src="/images/rendu-04.png" alt="Vision" fill className="object-cover" />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 20, y: 20 }}
               whileInView={{ opacity: 1, x: -24, y: 24 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.9, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute bottom-0 left-0 bg-white shadow-xl p-6 w-56 z-10"
+              transition={{ duration: 0.9, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute bottom-0 right-0 bg-white shadow-xl p-8 w-56 z-10"
             >
-              <p className="text-[#AB7A51] text-[10px] uppercase tracking-widest font-semibold mb-2">Livraison</p>
-              <p style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }} className="text-3xl font-light text-stone-900">2026</p>
-              <p className="text-stone-400 text-xs mt-1">Tunis, Tunisie</p>
+              <p style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }} className="text-3xl font-light text-stone-900 mb-2">Depuis 2004</p>
+              <p className="text-stone-500 text-[12px] leading-snug">Construire avec passion et expertise</p>
             </motion.div>
           </Reveal>
         </div>
       </section>
 
-      {/* ── VIDEO SHOWREEL ── */}
+{/* ── VIDEO SHOWREEL ── */}
       <section className="relative bg-stone-50 overflow-hidden">
         <VideoSection />
       </section>
+       {/* ── VALUES ── */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="text-center mb-16">
+            <Reveal>
+              <p className="text-[#AB7A51] text-[11px] uppercase tracking-[0.3em] font-semibold mb-4">Ce qui nous guide</p>
+              <h2 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }} className="text-4xl md:text-5xl font-light text-stone-900">Nos Valeurs</h2>
+            </Reveal>
+          </div>
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5"
+          >
+            {values.map((v, i) => {
+              const Icon = v.icon;
+              return (
+                <motion.div
+                  key={v.title}
+                  variants={cardLift}
+                  custom={i}
+                  className="bg-white p-8 group hover:shadow-lg transition-shadow duration-300 cursor-default"
+                  whileHover={{ y: -4 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <motion.div
+                    whileHover={{ rotate: 5, scale: 1.1 }}
+                    transition={{ duration: 0.3 }}
+                    className="w-12 h-12 bg-[#AB7A51]/8 flex items-center justify-center mb-6 group-hover:bg-[#AB7A51] transition-colors duration-300"
+                  >
+                    <Icon size={20} className="text-[#AB7A51] group-hover:text-white transition-colors duration-300" />
+                  </motion.div>
+                  <h3 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }} className="text-xl font-medium text-stone-900 mb-3">{v.title}</h3>
+                  <p className="text-stone-400 text-[13px] leading-relaxed">{v.desc}</p>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </div>
+      </section>
+
+
+      {/* ── AMENITIES ── */}
+      <section className="py-28 bg-stone-50">
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="mb-14">
+            <Reveal>
+              <p className="text-[#AB7A51] text-[11px] uppercase tracking-[0.3em] font-semibold mb-4">Services & Équipements</p>
+              <h2 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }} className="text-4xl md:text-5xl font-light text-stone-900 leading-tight max-w-xl">
+                Un art de vivre<br />
+                <em className="not-italic text-[#C49572]">pensé dans ses moindres détails.</em>
+              </h2>
+            </Reveal>
+          </div>
+
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-4"
+          >
+            {amenities.slice(0, 3).map((a, i) => (
+              <motion.div
+                key={a.label}
+                variants={cardLift}
+                custom={i}
+                className="group relative overflow-hidden cursor-pointer"
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="relative h-72 overflow-hidden">
+                  <Image src={a.img} alt={a.label} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  <motion.div
+                    className="absolute top-0 left-0 right-0 h-0.5 bg-[#4F9BFF] origin-left"
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: i * 0.12 + 0.2 }}
+                  />
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <p className="text-[#4F9BFF] text-[10px] uppercase tracking-widest font-semibold mb-1">{a.label}</p>
+                  <p className="text-white text-sm leading-snug">{a.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            className="grid grid-cols-1 md:grid-cols-2 md:w-2/3 md:mx-auto gap-4 mt-4"
+          >
+            {amenities.slice(3, 5).map((a, i) => (
+              <motion.div
+                key={a.label}
+                variants={cardLift}
+                custom={i + 3}
+                className="group relative overflow-hidden cursor-pointer"
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="relative h-72 overflow-hidden">
+                  <Image src={a.img} alt={a.label} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  <motion.div
+                    className="absolute top-0 left-0 right-0 h-0.5 bg-[#4F9BFF] origin-left"
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: (i + 3) * 0.12 + 0.2 }}
+                  />
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <p className="text-[#4F9BFF] text-[10px] uppercase tracking-widest font-semibold mb-1">{a.label}</p>
+                  <p className="text-white text-sm leading-snug">{a.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
 
       {/* ── APARTMENTS ── */}
-      <section className="py-28 bg-stone-50">
+      <section className="py-28 bg-white">
         <div className="max-w-7xl mx-auto px-8">
           <div className="mb-14 flex flex-col md:flex-row md:items-end justify-between gap-6">
             <Reveal>
@@ -279,117 +412,51 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── AMENITIES ── */}
-      <section className="py-28 bg-stone-50">
+     
+{/* ── TEAM ── */}
+      <section className="py-24 bg-stone-50">
         <div className="max-w-7xl mx-auto px-8">
           <div className="mb-14">
             <Reveal>
-              <p className="text-[#AB7A51] text-[11px] uppercase tracking-[0.3em] font-semibold mb-4">Services & Équipements</p>
-              <h2 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }} className="text-4xl md:text-5xl font-light text-stone-900 leading-tight max-w-xl">
-                Un art de vivre<br />
-                <em className="not-italic text-[#C49572]">pensé dans ses moindres détails.</em>
+              <p className="text-[#AB7A51] text-[11px] uppercase tracking-[0.3em] font-semibold mb-4">Notre Équipe</p>
+              <h2 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }} className="text-4xl md:text-5xl font-light text-stone-900 leading-tight">
+                Des femmes et des hommes<br />engagés à vos côtés.
               </h2>
             </Reveal>
           </div>
-
           <motion.div
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-60px" }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
           >
-            {amenities.map((a, i) => (
-<motion.div
-                key={a.label}
-                variants={cardLift}
-                custom={i}
-                className="group relative overflow-hidden cursor-pointer"
-                whileHover={{ y: -4 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="relative h-72 overflow-hidden">
-                  <Image src={a.img} alt={a.label} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+            {team.map((m, i) => (
+              <motion.div key={m.name} variants={cardLift} custom={i} className="group">
+                <div className="relative h-72 overflow-hidden mb-4">
                   <motion.div
-                    className="absolute top-0 left-0 right-0 h-0.5 bg-[#AB7A51] origin-left"
-                    initial={{ scaleX: 0 }}
-                    whileInView={{ scaleX: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: i * 0.12 + 0.2 }}
+                    className="absolute inset-0"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <Image src={m.img} alt={m.name} fill className="object-cover" />
+                  </motion.div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-stone-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <motion.div
+                    className="absolute top-3 left-3 w-4 h-4 border-t border-l border-[#AB7A51]"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ delay: i * 0.1 + 0.3 }}
+                  />
+                  <motion.div
+                    className="absolute bottom-3 right-3 w-4 h-4 border-b border-r border-[#AB7A51]"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ delay: i * 0.1 + 0.4 }}
                   />
                 </div>
-<div className="absolute bottom-0 left-0 right-0 p-5">
-                   <p className="text-[#AB7A51] text-[10px] uppercase tracking-widest font-semibold mb-1">{a.label}</p>
-                   <p className="text-white text-sm leading-snug">{a.desc}</p>
-                 </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-{/* ── HALL CINEMATIC ── */}
-       <section className="relative h-[80vh] min-h-[560px] overflow-hidden">
-        <motion.div
-          className="absolute inset-0"
-          initial={{ scale: 1.08 }}
-          whileInView={{ scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <Image src="/images/accueil.jpeg" alt="Hall entrée" fill className="object-cover object-center" />
-          <div className="absolute inset-0 bg-black/35" />
-        </motion.div>
-        <div className="absolute inset-0 flex items-center justify-center text-center px-8">
-          <div>
-            <Reveal>
-              <p className="text-[#AB7A51] text-[11px] uppercase tracking-[0.3em] font-semibold mb-5">Hall d&apos;Entrée</p>
-              <h2 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }} className="text-5xl md:text-7xl font-light text-white leading-tight mb-8">
-                Un accueil<br />qui marque les esprits.
-              </h2>
-              <Link href="/projets-realises" className="inline-flex items-center gap-3 border border-white/60 text-white hover:bg-white hover:text-stone-900 text-[12px] font-semibold tracking-widest uppercase px-8 py-4 transition-all duration-300">
-                Explorer la Résidence
-              </Link>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-{/* SERVICES ── */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-8">
-          <div className="mb-14 text-center">
-            <Reveal>
-              <p className="text-[#AB7A51] text-[11px] uppercase tracking-[0.3em] font-semibold mb-4">Nos Services</p>
-              <h2 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }} className="text-4xl md:text-5xl font-light text-stone-900">
-                Des solutions complètes pour vos projets.
-              </h2>
-            </Reveal>
-          </div>
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-t border-stone-100"
-          >
-            {[
-              { n: "01", t: "Construction",  d: "Ouvrages résidentiels, commerciaux et industriels livrés avec rigueur." },
-              { n: "02", t: "Architecture",  d: "Conception moderne sur mesure, adaptée à votre vision." },
-              { n: "03", t: "Promotion",     d: "Projets à forte valeur ajoutée, de l'étude à la livraison." },
-              { n: "04", t: "Conseil",       d: "Accompagnement stratégique et gestion de patrimoine immobilier." },
-            ].map((s, i) => (
-              <motion.div
-                key={s.n}
-                variants={cardLift}
-                custom={i}
-                className="group p-8 border-b md:border-b-0 border-r border-stone-100 last:border-r-0 hover:bg-stone-50 transition-colors cursor-pointer"
-              >
-                <p style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }} className="text-5xl font-light text-[#C49572] group-hover:text-[#AB7A51] mb-6 transition-colors duration-500">{s.n}</p>
-                <h3 className="text-base font-semibold text-stone-900 mb-3">{s.t}</h3>
-                <p className="text-stone-400 text-[13px] leading-relaxed mb-6">{s.d}</p>
-                <motion.div className="h-px bg-[#AB7A51]" initial={{ width: 24 }} whileHover={{ width: 48 }} transition={{ duration: 0.3 }} />
+                <p style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }} className="text-xl font-medium text-stone-900">{m.name}</p>
+                <p className="text-[#AB7A51] text-[12px] font-medium mt-0.5">{m.role}</p>
               </motion.div>
             ))}
           </motion.div>

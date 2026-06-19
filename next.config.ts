@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+   allowedDevOrigins: ['confront-uniquely-preorder.ngrok-free.dev'],
 };
 
 export default nextConfig;

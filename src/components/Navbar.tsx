@@ -8,9 +8,8 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const links = [
   { href: "/", label: "Accueil" },
-  { href: "/a-propos", label: "À Propos" },
   { href: "/projets-en-cours", label: "Projets en Cours" },
-  { href: "/projets-realises", label: "Projets Réalisés" },
+  { href: "/projets-realises", label: "Projets Réalisé" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -56,7 +55,7 @@ export default function Navbar() {
               href={l.href}
               className={`relative text-[13px] font-medium tracking-wide transition-colors duration-200 group ${
                 transparent
-                  ? pathname === l.href ? "text-[#AB7A51]" : "text-white/75 hover:text-white"
+                  ? pathname === l.href ? "text-[#AB7A51]" : "text-white/90 hover:text-white"
                   : pathname === l.href ? "text-[#AB7A51]" : "text-stone-500 hover:text-stone-900"
               }`}
             >
