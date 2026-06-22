@@ -152,15 +152,18 @@ export default function ContactPage() {
               ))}
             </motion.ul>
 
-            {/* Location visual */}
-            <div className="relative h-44 overflow-hidden">
-              <Image src="/images/exterieur-01.jpeg" alt="Localisation" fill className="object-cover" />
-              <div className="absolute inset-0 bg-[#0F0C42]/40" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="bg-[#AB7A51] text-white text-[11px] font-semibold tracking-widest uppercase px-4 py-2">
-                  Sahloul 4 · Sousse
-                </span>
-              </div>
+            {/* Google Maps Embed – fully interactive */}
+            <div className="relative h-44 rounded-sm border border-stone-200">
+              <iframe
+                src="https://maps.google.com/maps?q=Sahloul%204%2C%20Sousse&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0, pointerEvents: "auto" }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Localisation BAM Immobilière"
+              ></iframe>
             </div>
           </Reveal>
 
