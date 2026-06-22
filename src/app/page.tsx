@@ -3,11 +3,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, ChevronRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import PartnerCarousel from "@/components/PartnerCarousel";
 import { slideLeft, slideRight, scaleReveal, staggerContainer, cardLift, lineGrow, countUp } from "@/lib/motion";
-import { Users, Award, Target, Heart } from "lucide-react";
+import { Award, Target, Heart, Users } from "lucide-react";
 
 const amenities = [
   { img: "/Construction.png", label: "Construction", desc: "Gros œuvre et travaux de construction avec des matériaux de haute qualité." },
@@ -15,12 +15,6 @@ const amenities = [
   { img: "/Promotion immobiliére.png", label: "Promotion Immobilière", desc: "Promotion et vente de biens immobiliers neufs et résidentiels." },
   { img: "/Gestion et conseil.png", label: "Gestion & Conseil", desc: "Conseil en gestion immobilière et optimisation de votre patrimoine." },
   { img: "/Livraison clé a main.png", label: "Livraison Clé en Main", desc: "Livraison complète et prête à l'emménagement de vos espaces." },
-];
-
-const apartments = [
-  { label: "S+1", img: "/images/appart-s1-01.jpeg",  surface: "85–95 m²",   rooms: "2 pièces" },
-  { label: "S+2", img: "/images/appart-s2-01.jpeg",  surface: "110–130 m²", rooms: "3 pièces" },
-  { label: "S+3", img: "/images/appart-s1-02.jpeg",  surface: "145–165 m²", rooms: "4 pièces" },
 ];
 
 const stats = [
@@ -38,10 +32,10 @@ const values = [
 ];
 
 const team = [
-  { name: "Anis Belhadj",     role: "Directeur Général",        img: "/images/hall-04.jpg" },
-  { name: "Sonia Mansour",    role: "Directrice Architecture",   img: "/images/hall-05.jpg" },
-  { name: "Karim Trabelsi",   role: "Chef de Projet Senior",     img: "/images/hall-06.jpg" },
-  { name: "Leila Baccouche",  role: "Responsable Commerciale",   img: "/images/hall-02.jpg" },
+  { name: "Ahmed Ben Ali", role: "Directeur Général", img: "/team/ahmed.jpg" },
+  { name: "Sarra Mansour", role: "Architecte", img: "/team/sarra.jpg" },
+  { name: "Karim Trabelsi", role: "Chef de Projet", img: "/team/karim.jpg" },
+  { name: "Leila Karray", role: "Responsable Commerciale", img: "/team/leila.jpg" },
 ];
 
 export default function HomePage() {
@@ -163,7 +157,7 @@ export default function HomePage() {
       </section>
 
       {/* ── MISSION ── */}
-      <section className="py-28 bg-white overflow-hidden">
+      <section className="py-28 bg-stone-50 overflow-hidden">
         <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <Reveal variants={slideLeft}>
             <p className="text-[#AB7A51] text-[11px] uppercase tracking-[0.3em] font-semibold mb-5">Notre Mission</p>
@@ -217,11 +211,12 @@ export default function HomePage() {
         </div>
       </section>
 
-{/* ── VIDEO SHOWREEL ── */}
+      {/* ── VIDEO SHOWREEL ── */}
       <section className="relative bg-stone-50 overflow-hidden">
         <VideoSection />
       </section>
-       {/* ── VALUES ── */}
+
+      {/* ── VALUES ── */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-8">
           <div className="text-center mb-16">
@@ -263,7 +258,6 @@ export default function HomePage() {
           </motion.div>
         </div>
       </section>
-
 
       {/* ── AMENITIES ── */}
       <section className="py-28 bg-stone-50">
@@ -349,123 +343,11 @@ export default function HomePage() {
           </motion.div>
         </div>
       </section>
-
-      {/* ── APARTMENTS ── */}
-      <section className="py-28 bg-white">
-        <div className="max-w-7xl mx-auto px-8">
-          <div className="mb-14 flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <Reveal>
-              <p className="text-[#AB7A51] text-[11px] uppercase tracking-[0.3em] font-semibold mb-4">Appartements</p>
-              <h2 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }} className="text-4xl md:text-5xl font-light text-stone-900 leading-tight">
-                Des espaces conçus<br />pour votre mode de vie.
-              </h2>
-            </Reveal>
-            <Reveal>
-              <Link href="/projets-realises" className="inline-flex items-center gap-2 text-stone-500 text-sm hover:text-[#AB7A51] transition-colors whitespace-nowrap">
-                Voir tous les plans <ChevronRight size={15} />
-              </Link>
-            </Reveal>
-          </div>
-
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-5"
-          >
-            {apartments.map((a, i) => (
-              <motion.div
-                key={a.label}
-                variants={cardLift}
-                custom={i}
-                className="group bg-white overflow-hidden cursor-pointer"
-                whileHover={{ y: -4 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="relative h-64 overflow-hidden">
-                  <Image src={a.img} alt={a.label} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
-                  {/* Architectural overlay line */}
-                  <motion.div
-                    className="absolute bottom-0 left-0 h-0.5 bg-[#AB7A51]"
-                    initial={{ width: 0 }}
-                    whileInView={{ width: "100%" }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.3 + i * 0.15, ease: [0.22, 1, 0.36, 1] }}
-                  />
-                </div>
-                <div className="p-7 flex items-center justify-between">
-                  <div>
-                    <p style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }} className="text-3xl font-light text-stone-900 mb-1">{a.label}</p>
-                    <p className="text-stone-400 text-[12px]">{a.rooms} · {a.surface}</p>
-                  </div>
-                  <motion.div
-                    whileHover={{ scale: 1.1 }}
-                    className="w-9 h-9 border border-[#AB7A51] flex items-center justify-center text-[#AB7A51] group-hover:bg-[#AB7A51] group-hover:text-white transition-colors"
-                  >
-                    <ArrowRight size={14} />
-                  </motion.div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-     
-{/* ── TEAM ── */}
-      <section className="py-24 bg-stone-50">
-        <div className="max-w-7xl mx-auto px-8">
-          <div className="mb-14">
-            <Reveal>
-              <p className="text-[#AB7A51] text-[11px] uppercase tracking-[0.3em] font-semibold mb-4">Notre Équipe</p>
-              <h2 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }} className="text-4xl md:text-5xl font-light text-stone-900 leading-tight">
-                Des femmes et des hommes<br />engagés à vos côtés.
-              </h2>
-            </Reveal>
-          </div>
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
-          >
-            {team.map((m, i) => (
-              <motion.div key={m.name} variants={cardLift} custom={i} className="group">
-                <div className="relative h-72 overflow-hidden mb-4">
-                  <motion.div
-                    className="absolute inset-0"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                  >
-                    <Image src={m.img} alt={m.name} fill className="object-cover" />
-                  </motion.div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-stone-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <motion.div
-                    className="absolute top-3 left-3 w-4 h-4 border-t border-l border-[#AB7A51]"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ delay: i * 0.1 + 0.3 }}
-                  />
-                  <motion.div
-                    className="absolute bottom-3 right-3 w-4 h-4 border-b border-r border-[#AB7A51]"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ delay: i * 0.1 + 0.4 }}
-                  />
-                </div>
-                <p style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }} className="text-xl font-medium text-stone-900">{m.name}</p>
-                <p className="text-[#AB7A51] text-[12px] font-medium mt-0.5">{m.role}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-                  {/* PARTNERS CAROUSEL */}
+      {/* PARTNERS CAROUSEL */}
       <PartnerCarousel />
+
       {/* CONTACT CTA - Vous avez un projet ? */}
-      <section className="bg-stone-50 py-20">
+      <section className="bg-white py-20">
         <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
           <Reveal variants={scaleReveal} className="relative h-72 lg:h-auto min-h-[280px]">
             <Image src="/images/entree-01.jpg" alt="Entrée principale" fill className="object-cover" />
@@ -484,8 +366,6 @@ export default function HomePage() {
           </Reveal>
         </div>
       </section>
-
-
     </>
   );
 }
@@ -545,8 +425,8 @@ function VideoSection() {
               </h2>
             </motion.div>
           </div>
-          </div>
         </div>
+      </div>
 
       {/* Bottom architectural rule */}
       <motion.div

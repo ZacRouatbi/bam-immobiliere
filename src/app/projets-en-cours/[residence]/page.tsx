@@ -4,7 +4,13 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Reveal from "@/components/Reveal";
-const categories = ["Tous", "Extérieur", "Intérieur", "Jardins", "Sport & Loisirs"];
+const categories = ["Tous", "Extérieur", "Intérieur", "Jardins", "Sport & Loisirs", "Plans"];
+
+const plans = [
+  { name: "Bloc A", file: "/Plans de vente - Bloc A - 25 02 2026.pdf" },
+  { name: "Bloc B", file: "/Plans de vente - Bloc B - 25 02 2026.pdf" },
+  { name: "Bloc C", file: "/Plans de vente - Bloc C - 25 02 2026.pdf" },
+];
 
 const projects = [
   { name: "Façade Principale",    cat: "Extérieur",       year: "2025", img: "/images/facade-principale.png", desc: "Vue frontale — architecture contemporaine, balcons en courbes, végétalisation intégrée.", large: true },
@@ -20,8 +26,8 @@ const projects = [
   { name: "Bassin Koi",           cat: "Jardins",         year: "2025", img: "/images/piscine.jpeg",          desc: "Bassin décoratif avec carpes koï et terrasses bois.", large: false },
   { name: "Jardin Extérieur",     cat: "Jardins",         year: "2025", img: "/images/jardin-03.jpg",         desc: "Couloirs paysagés et allées végétalisées.", large: false },
   { name: "Salle de Sport",       cat: "Sport & Loisirs", year: "2025", img: "/images/sport-01.jpg",          desc: "Fitness center avec équipements professionnels et vue dégagée.", large: true },
-  { name: "Cardio & Musculation", cat: "Sport & Loisirs", year: "2025", img: "/images/sport-03.jpg",          desc: "Zone cardio équipée de machines de dernière génération.", large: false },
-  { name: "Zone Étirements",      cat: "Sport & Loisirs", year: "2025", img: "/images/sport-04.jpg",          desc: "Espace yoga et étirements avec sol spécialisé.", large: false },
+  { name: "Zone Étirements",      cat: "Sport & Loisirs", year: "2025", img: "/images/sport-03.jpg",          desc: "Zone cardio équipée de machines de dernière génération.", large: false },
+  { name: "Cardio & Musculation", cat: "Sport & Loisirs", year: "2025", img: "/images/sport-04.jpg",          desc: "Espace yoga et étirements avec sol spécialisé.", large: false },
 ];
 
 const residences = {
@@ -32,6 +38,8 @@ const residences = {
 export default function ResidenceProjectsPage({ params }: { params: Promise<{ residence: string }> }) {
   const resolvedParams = use(params);
   const [active, setActive] = useState("Tous");
+  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
+  const isPlansView = active === "Plans";
   const filtered = active === "Tous" ? projects : projects.filter((p) => p.cat === active);
   const residenceName = residences[resolvedParams.residence as keyof typeof residences] || "Résidence";
 
@@ -112,51 +120,121 @@ export default function ResidenceProjectsPage({ params }: { params: Promise<{ re
               transition={{ duration: 0.35 }}
               className="columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4"
             >
-              {filtered.map((p, i) => (
-                <motion.div
-                  key={p.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}
-                  className="group break-inside-avoid bg-white overflow-hidden mb-4 cursor-pointer"
-                  whileHover={{ y: -3 }}
-                >
-                  <div className={`relative overflow-hidden ${p.large ? "h-80" : "h-52"}`}>
-                    <motion.div
-                      className="absolute inset-0"
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                    >
-                      <Image src={p.img} alt={p.name} fill className="object-cover" />
-                    </motion.div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-stone-900/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
-                    <div className="absolute top-3 left-3 bg-[#AB7A51] text-white text-[10px] font-semibold tracking-widest uppercase px-3 py-1">
-                      {p.cat}
-                    </div>
-                    <motion.div
-                      className="absolute bottom-0 left-0 right-0 p-5 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300"
-                    >
-                      <p className="text-white/70 text-[12px] leading-snug">{p.desc}</p>
-                    </motion.div>
-                    <motion.div className="absolute top-2 right-2 w-4 h-4 border-t border-r border-white/40" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.3 }} />
-                  </div>
-                  <div className="px-5 py-4 border-t border-stone-100">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }} className="text-lg font-medium text-stone-900">{p.name}</p>
-                        <p className="text-stone-400 text-[11px] mt-0.5">{p.year}</p>
+              {isPlansView ? (
+                plans.map((plan, i) => (
+                  <motion.div
+                    key={plan.name}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                    className="group break-inside-avoid bg-white overflow-hidden mb-4 cursor-pointer"
+                    whileHover={{ y: -3 }}
+                    onClick={() => setSelectedPlan(plan.file)}
+                  >
+                    <div className="relative overflow-hidden h-52 bg-stone-100 flex items-center justify-center">
+                      <div className="absolute top-3 left-3 bg-[#AB7A51] text-white text-[10px] font-semibold tracking-widest uppercase px-3 py-1">
+                        Plans
                       </div>
-                      <div className="w-7 h-7 border border-stone-200 flex items-center justify-center text-stone-400 group-hover:border-[#AB7A51] group-hover:text-[#AB7A51] transition-colors">
-                        <ArrowRight size={12} />
+                      <div className="text-center">
+                        <p className="text-stone-500 text-xs mb-2">PDF Document</p>
+                        <p style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }} className="text-lg font-medium text-stone-900">{plan.name}</p>
                       </div>
                     </div>
-                  </div>
-                </motion.div>
-              ))}
+                    <div className="px-5 py-4 border-t border-stone-100">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }} className="text-lg font-medium text-stone-900">{plan.name}</p>
+                          <p className="text-stone-400 text-[11px] mt-0.5">Visualiser</p>
+                        </div>
+                        <div className="w-7 h-7 border border-stone-200 flex items-center justify-center text-stone-400 group-hover:border-[#AB7A51] group-hover:text-[#AB7A51] transition-colors">
+                          <ArrowRight size={12} />
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))
+              ) : (
+                filtered.map((p, i) => (
+                  <motion.div
+                    key={p.name}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                    className="group break-inside-avoid bg-white overflow-hidden mb-4 cursor-pointer"
+                    whileHover={{ y: -3 }}
+                  >
+                    <div className={`relative overflow-hidden ${p.large ? "h-80" : "h-52"}`}>
+                      <motion.div
+                        className="absolute inset-0"
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                      >
+                        <Image src={p.img} alt={p.name} fill className="object-cover" />
+                      </motion.div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-stone-900/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
+                      <div className="absolute top-3 left-3 bg-[#AB7A51] text-white text-[10px] font-semibold tracking-widest uppercase px-3 py-1">
+                        {p.cat}
+                      </div>
+                      <motion.div
+                        className="absolute bottom-0 left-0 right-0 p-5 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300"
+                      >
+                        <p className="text-white/70 text-[12px] leading-snug">{p.desc}</p>
+                      </motion.div>
+                      <motion.div className="absolute top-2 right-2 w-4 h-4 border-t border-r border-white/40" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.3 }} />
+                    </div>
+                    <div className="px-5 py-4 border-t border-stone-100">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }} className="text-lg font-medium text-stone-900">{p.name}</p>
+                          <p className="text-stone-400 text-[11px] mt-0.5">{p.year}</p>
+                        </div>
+                        <div className="w-7 h-7 border border-stone-200 flex items-center justify-center text-stone-400 group-hover:border-[#AB7A51] group-hover:text-[#AB7A51] transition-colors">
+                          <ArrowRight size={12} />
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))
+              )}
             </motion.div>
           </AnimatePresence>
         </div>
       </section>
+
+      {/* PDF VIEWER MODAL */}
+      <AnimatePresence>
+        {selectedPlan && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
+            onClick={() => setSelectedPlan(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-white w-full max-w-5xl h-[90vh] overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center justify-between p-4 border-b border-stone-200">
+                <h3 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }} className="text-xl font-medium text-stone-900">
+                  {plans.find(p => p.file === selectedPlan)?.name}
+                </h3>
+                <button onClick={() => setSelectedPlan(null)} className="text-stone-500 hover:text-stone-900 text-2xl cursor-pointer">
+                  ×
+                </button>
+              </div>
+              <iframe
+                src={selectedPlan}
+                className="w-full h-full"
+                title="PDF Viewer"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
