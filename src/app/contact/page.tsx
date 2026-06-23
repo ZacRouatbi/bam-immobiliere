@@ -152,7 +152,7 @@ export default function ContactPage() {
               ))}
             </motion.ul>
 
-            {/* Google Maps Embed – fully interactive */}
+            {/* Google Maps Embed */}
             <div className="relative h-44 rounded-sm border border-stone-200">
               <iframe
                 src="https://maps.google.com/maps?q=Sahloul%204%2C%20Sousse&t=&z=15&ie=UTF8&iwloc=&output=embed"
