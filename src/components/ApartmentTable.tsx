@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useMemo } from "react";
-import styles from "./ApartmentTable.module.css";
 
 const BLOCS = {
   A: {
@@ -102,10 +101,10 @@ const FLOOR_ORDER = [
 function TypeBadge({ type }) {
   const badge = TYPE_BADGE[type] || { bg: "#F1EFE8", text: "#5F5E5A", label: type };
   return (
-    <span style={{
-      background: badge.bg, color: badge.text, fontSize: 11, fontWeight: 500,
-      padding: "3px 8px", borderRadius: 6, whiteSpace: "nowrap", display: "inline-block",
-    }}>
+    <span 
+      className="inline-block text-[11px] font-medium px-2 py-[3px] rounded-md whitespace-nowrap"
+      style={{ background: badge.bg, color: badge.text }}
+    >
       {badge.label}
     </span>
   );
@@ -120,49 +119,30 @@ function PlanModal({ apt, bloc, onClose }) {
   return (
     <div
       onClick={onClose}
-      style={{
-        position: "fixed", inset: 0, background: "rgba(0,0,0,0.6)",
-        display: "flex", alignItems: "center", justifyContent: "center",
-        zIndex: 1000, padding: 16,
-      }}
+      className="fixed inset-0 bg-black/60 flex items-center justify-center z-[1000] p-4"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        style={{
-          background: "var(--color-background-primary)",
-          borderRadius: 16,
-          border: "0.5px solid var(--color-border-tertiary)",
-          width: "100%",
-          maxWidth: 1100,
-          height: "92vh",
-          display: "flex",
-          flexDirection: "column",
-          overflow: "hidden",
-        }}
+        className="bg-white rounded-2xl border border-gray-200 w-full max-w-6xl h-[92vh] flex flex-col overflow-hidden"
       >
         {/* Modal header */}
-        <div style={{
-          display: "flex", alignItems: "center", justifyContent: "space-between",
-          padding: "14px 20px",
-          borderBottom: "0.5px solid var(--color-border-tertiary)",
-          gap: 12, flexWrap: "wrap", flexShrink: 0,
-        }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
-            <span style={{
-              background: colors.light, color: colors.accent,
-              fontWeight: 500, fontSize: 15, padding: "4px 14px", borderRadius: 8,
-            }}>
+        <div className="flex items-center justify-between p-[14px_20px] border-b border-gray-200 gap-3 flex-wrap flex-shrink-0">
+          <div className="flex items-center gap-2.5 flex-wrap">
+            <span 
+              className="font-medium text-[15px] px-[14px] py-1 rounded-lg"
+              style={{ background: colors.light, color: colors.accent }}
+            >
               {apt.id}
             </span>
-            <span style={{ color: "var(--color-text-secondary)", fontSize: 13 }}>
+            <span className="text-gray-600 text-[13px]">
               {apt.floor}
             </span>
             <TypeBadge type={apt.type} />
-            <span style={{ color: "var(--color-text-secondary)", fontSize: 13 }}>
+            <span className="text-gray-600 text-[13px]">
               {apt.surface} m² habitable
             </span>
             {apt.terrace != null && (
-              <span style={{ color: "var(--color-text-secondary)", fontSize: 13 }}>
+              <span className="text-gray-600 text-[13px]">
                 · terrasse {apt.terrace} m²
               </span>
             )}
@@ -170,32 +150,20 @@ function PlanModal({ apt, bloc, onClose }) {
           <button
             onClick={onClose}
             aria-label="Fermer"
-            style={{
-              background: "none",
-              border: "0.5px solid var(--color-border-secondary)",
-              borderRadius: 8, padding: "5px 14px", cursor: "pointer",
-              color: "var(--color-text-secondary)", fontSize: 13,
-            }}
+            className="bg-none border border-gray-300 rounded-lg px-[14px] py-[5px] cursor-pointer text-gray-600 text-[13px] hover:bg-gray-50 transition-colors"
           >
             Fermer ✕
           </button>
         </div>
 
         {/* PDF iframe — fills remaining height */}
-        <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
+        <div className="flex-1 relative overflow-hidden">
           <iframe
             src={pdfUrl}
             title={`Plan appartement ${apt.id}`}
-            style={{ width: "100%", height: "100%", border: "none", display: "block" }}
+            className="w-full h-full border-none block"
           />
-          <div style={{
-            position: "absolute", bottom: 14, right: 14,
-            background: "var(--color-background-primary)",
-            border: "0.5px solid var(--color-border-tertiary)",
-            borderRadius: 8, padding: "5px 12px",
-            fontSize: 11, color: "var(--color-text-secondary)",
-            pointerEvents: "none",
-          }}>
+          <div className="absolute bottom-[14px] right-[14px] bg-white border border-gray-200 rounded-lg px-3 py-[5px] text-[11px] text-gray-600 pointer-events-none">
             {filename.replace(".pdf", "")} · page {apt.page}
           </div>
         </div>
@@ -207,47 +175,38 @@ function PlanModal({ apt, bloc, onClose }) {
 function ApartmentRow({ apt, colors, onView }) {
   return (
     <tr
-      style={{
-        borderBottom: "1px solid rgba(0,0,0,0.05)",
-        transition: "background 0.15s ease",
-        backgroundColor: "#FAFAFA",
-      }}
-      onMouseEnter={(e) => (e.currentTarget.style.background = "#F0F0F7")}
-      onMouseLeave={(e) => (e.currentTarget.style.background = "#FAFAFA")}
+      className="border-b border-black/5 transition-colors duration-150 bg-[#FAFAFA] hover:bg-[#F0F0F7]"
     >
-      <td style={{ padding: "10px 14px" }}>
-        <span style={{
-          fontWeight: 600, fontSize: 13, color: colors.accent,
-          background: colors.light, padding: "3px 10px", borderRadius: 6, letterSpacing: "0.02em",
-          display: "inline-block",
-        }}>
+      <td className="p-[10px_14px]">
+        <span 
+          className="font-semibold text-[13px] px-[10px] py-[3px] rounded-md inline-block tracking-[0.02em]"
+          style={{ color: colors.accent, background: colors.light }}
+        >
           {apt.id}
         </span>
       </td>
-      <td style={{ padding: "10px 14px", fontSize: 13, color: "var(--color-text-secondary)" }}>
+      <td className="p-[10px_14px] text-[13px] text-gray-600">
         {apt.floor}
       </td>
-      <td style={{ padding: "10px 14px" }}>
+      <td className="p-[10px_14px]">
         <TypeBadge type={apt.type} />
       </td>
-      <td style={{ padding: "10px 14px", fontSize: 13, fontWeight: 600, color: "var(--color-text-primary)" }}>
+      <td className="p-[10px_14px] text-[13px] font-semibold text-gray-900">
         {apt.surface} m²
       </td>
-      <td style={{ padding: "10px 14px", fontSize: 13, color: "var(--color-text-secondary)" }}>
+      <td className="p-[10px_14px] text-[13px] text-gray-600">
         {apt.commonArea} m²
       </td>
-      <td style={{ padding: "10px 14px", fontSize: 13, color: "var(--color-text-secondary)" }}>
+      <td className="p-[10px_14px] text-[13px] text-gray-600">
         {apt.terrace != null ? `${apt.terrace} m²` : "—"}
       </td>
-      <td style={{ padding: "10px 14px" }}>
+      <td className="p-[10px_14px]">
         <button
           onClick={() => onView(apt)}
-          style={{
-            background: "none", border: `1px solid ${colors.border}`,
-            borderRadius: 8, padding: "5px 14px", cursor: "pointer",
-            fontSize: 12, color: colors.accent, fontWeight: 600,
-            whiteSpace: "nowrap",
-            transition: "background 0.15s, color 0.15s",
+          className="bg-none rounded-lg px-[14px] py-[5px] cursor-pointer text-[12px] font-semibold whitespace-nowrap transition-colors duration-150"
+          style={{ 
+            border: `1px solid ${colors.border}`,
+            color: colors.accent
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.background = colors.accent;
@@ -280,28 +239,15 @@ function BlocTable({ blocKey, apartments, filterType, filterFloor, onView }) {
 
   if (filtered.length === 0) {
     return (
-      <div style={{ textAlign: "center", padding: "48px 0", color: "var(--color-text-secondary)", fontSize: 14 }}>
+      <div className="text-center py-12 text-gray-600 text-[14px]">
         Aucun appartement ne correspond aux filtres sélectionnés.
       </div>
     );
   }
 
   return (
-    <div style={{
-      background: "var(--color-background-primary)",
-      border: "1px solid #E5E5EA",
-      borderRadius: 12,
-      overflow: "hidden",
-      boxShadow: "0 2px 8px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04)",
-      overflowX: "auto",
-      WebkitOverflowScrolling: "touch",
-    }}>
-      <table style={{ 
-        width: "100%", 
-        borderCollapse: "collapse", 
-        tableLayout: "fixed",
-        minWidth: "650px",
-      }}>
+    <div className="bg-white border border-[#E5E5EA] rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.06),0_1px_3px_rgba(0,0,0,0.04)] overflow-x-auto [-webkit-overflow-scrolling:touch]">
+      <table className="w-full border-collapse table-fixed min-w-[650px]">
         <colgroup>
           <col style={{ width: "9%" }} />
           <col style={{ width: "16%" }} />
@@ -312,15 +258,9 @@ function BlocTable({ blocKey, apartments, filterType, filterFloor, onView }) {
           <col style={{ width: "16%" }} />
         </colgroup>
         <thead>
-          <tr style={{
-            background: "#F7F7FA",
-            borderBottom: "1px solid #E5E5EA",
-          }}>
+          <tr className="bg-[#F7F7FA] border-b border-[#E5E5EA]">
             {["Réf.", "Étage", "Type", "Surface", "Parties communes", "Terrasse", "Plan"].map((h) => (
-              <th key={h} style={{
-                padding: "9px 14px", textAlign: "left", fontSize: 11, fontWeight: 600,
-                color: "#6B6B78", letterSpacing: "0.05em", textTransform: "uppercase",
-              }}>
+              <th key={h} className="p-[9px_14px] text-left text-[11px] font-semibold text-[#6B6B78] tracking-[0.05em] uppercase">
                 {h}
               </th>
             ))}
@@ -330,14 +270,12 @@ function BlocTable({ blocKey, apartments, filterType, filterFloor, onView }) {
           {byFloor.map(({ floor, rows }) => (
             <React.Fragment key={floor}>
               {!filterFloor && (
-                <tr style={{ background: "#F7F7FA" }}>
-                  <td colSpan={7} style={{
-                    padding: "6px 14px", fontSize: 11, fontWeight: 600,
-                    color: colors.accent,
-                    borderTop: "1px solid #E5E5EA",
-                    borderBottom: "1px solid #E5E5EA",
-                    letterSpacing: "0.04em",
-                  }}>
+                <tr className="bg-[#F7F7FA]">
+                  <td 
+                    colSpan={7} 
+                    className="p-[6px_14px] text-[11px] font-semibold border-t border-[#E5E5EA] border-b border-[#E5E5EA] tracking-[0.04em]"
+                    style={{ color: colors.accent }}
+                  >
                     {floor}
                   </td>
                 </tr>
@@ -387,32 +325,23 @@ export default function ApartmentTable() {
   };
 
   return (
-    <div style={{ 
-      fontFamily: "var(--font-sans)", 
-      maxWidth: 980, 
-      margin: "0 auto", 
-      padding: "24px 16px",
-      overflowX: "hidden",
-    }}>
+    <div className="font-sans max-w-[980px] mx-auto p-[24px_16px] overflow-x-hidden">
       <h2 className="sr-only">Table des appartements — Immeuble The Rock Radhia IV</h2>
 
-      <div style={{ marginBottom: 28 }}>
-        <p style={{
-          fontSize: 11, fontWeight: 500, color: "var(--color-text-secondary)",
-          letterSpacing: "0.08em", textTransform: "uppercase", margin: "0 0 4px",
-        }}>
+      <div className="mb-7">
+        <p className="text-[11px] font-medium text-gray-600 tracking-[0.08em] uppercase m-0 mb-1">
           Immeuble The Rock — Radhia IV
         </p>
-        <h1 style={{ fontSize: 22, fontWeight: 500, color: "var(--color-text-primary)", margin: "0 0 2px" }}>
+        <h1 className="text-[22px] font-medium text-gray-900 m-0 mb-0.5">
           Plans de vente
         </h1>
-        <p style={{ fontSize: 14, color: "var(--color-text-secondary)", margin: 0 }}>
+        <p className="text-[14px] text-gray-600 m-0">
           Sélectionnez un bloc pour consulter les appartements disponibles.
         </p>
       </div>
 
       {/* Bloc selector cards */}
-      <div style={{ display: "flex", gap: 12, marginBottom: 28, flexWrap: "wrap" }}>
+      <div className="flex gap-3 mb-7 flex-wrap">
         {Object.entries(BLOCS).map(([key, bloc]) => {
           const c = BLOC_COLORS[key];
           const active = activeBloc === key;
@@ -420,49 +349,39 @@ export default function ApartmentTable() {
             <button
               key={key}
               onClick={() => switchBloc(key)}
+              className={`flex-1 min-w-[140px] p-[18px_20px] rounded-xl text-left cursor-pointer transition-all duration-200 ${
+                active 
+                  ? `shadow-[0_4px_12px_rgba(0,0,0,0.10),0_2px_4px_rgba(0,0,0,0.06)] -translate-y-[2px]` 
+                  : "shadow-[0_1px_3px_rgba(0,0,0,0.06),0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.10),0_2px_4px_rgba(0,0,0,0.06)] hover:-translate-y-[2px]"
+              }`}
               style={{
-                flex: "1 1 140px",
-                padding: "18px 20px",
-                borderRadius: 12,
                 border: active ? `2px solid ${c.accent}` : "1px solid #E5E5EA",
                 background: active ? c.light : "#FFFFFF",
-                cursor: "pointer",
-                textAlign: "left",
-                transition: "all 0.2s ease",
-                boxShadow: active 
-                  ? `0 4px 12px rgba(0,0,0,0.10), 0 2px 4px rgba(0,0,0,0.06)` 
-                  : "0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)",
-                transform: active ? "translateY(-2px)" : "translateY(0)",
               }}
               onMouseEnter={(e) => {
                 if (!active) {
-                  e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.10), 0 2px 4px rgba(0,0,0,0.06)";
-                  e.currentTarget.style.transform = "translateY(-2px)";
                   e.currentTarget.style.borderColor = c.border;
                 }
               }}
               onMouseLeave={(e) => {
                 if (!active) {
-                  e.currentTarget.style.boxShadow = "0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)";
-                  e.currentTarget.style.transform = "translateY(0)";
                   e.currentTarget.style.borderColor = "#E5E5EA";
                 }
               }}
             >
-              <div style={{ 
-                fontSize: 22, 
-                fontWeight: 600, 
-                color: c.accent, 
-                marginBottom: 4,
-                letterSpacing: "-0.02em"
-              }}>
+              <div 
+                className="text-[22px] font-semibold mb-1 tracking-[-0.02em]"
+                style={{ color: c.accent }}
+              >
                 {bloc.label}
               </div>
-              <div style={{ 
-                fontSize: 12, 
-                color: active ? c.accent : "var(--color-text-secondary)",
-                fontWeight: active ? 500 : 400,
-              }}>
+              <div 
+                className="text-[12px]"
+                style={{ 
+                  color: active ? c.accent : "var(--color-text-secondary)",
+                  fontWeight: active ? 500 : 400,
+                }}
+              >
                 {bloc.apartments.length} appartements
               </div>
             </button>
@@ -472,12 +391,7 @@ export default function ApartmentTable() {
 
       {/* Empty state */}
       {!activeBloc && (
-        <div style={{
-          textAlign: "center", padding: "56px 0",
-          color: "var(--color-text-secondary)", fontSize: 14,
-          border: "0.5px dashed var(--color-border-tertiary)",
-          borderRadius: 12,
-        }}>
+        <div className="text-center py-14 text-gray-600 text-[14px] border border-dashed border-gray-300 rounded-xl">
           Choisissez un bloc ci-dessus pour afficher les appartements.
         </div>
       )}
@@ -485,36 +399,25 @@ export default function ApartmentTable() {
       {/* Filter bar + table */}
       {activeBloc && currentBloc && (
         <>
-          <div style={{
-            display: "flex", 
-            flexWrap: "wrap", 
-            gap: 10, 
-            alignItems: "center",
-            marginBottom: 20, 
-            padding: "12px 16px",
-            background: "var(--color-background-secondary)",
-            borderRadius: 10, 
-            border: "0.5px solid var(--color-border-tertiary)",
-          }}>
-            <div style={{ width: 4, height: 18, borderRadius: 2, background: colors.accent, flexShrink: 0 }} />
-            <span style={{ fontSize: 14, fontWeight: 500, color: colors.accent, marginRight: 4 }}>
+          <div className="flex flex-wrap gap-2.5 items-center mb-5 p-3 bg-gray-50 rounded-xl border border-gray-200">
+            <div 
+              className="w-1 h-[18px] rounded-sm flex-shrink-0"
+              style={{ background: colors.accent }}
+            />
+            <span 
+              className="text-[14px] font-medium mr-1"
+              style={{ color: colors.accent }}
+            >
               {currentBloc.label}
             </span>
-            <span style={{ fontSize: 12, color: "var(--color-text-secondary)" }}>
+            <span className="text-[12px] text-gray-600">
               {visibleCount} appartement{visibleCount !== 1 ? "s" : ""}
             </span>
-            <div style={{ flex: 1, minWidth: "20px" }} />
+            <div className="flex-1 min-w-[20px]" />
             <select
               value={filterType}
               onChange={(e) => setFilterType(e.target.value)}
-              style={{ 
-                fontSize: 13, 
-                padding: "5px 10px", 
-                borderRadius: 8, 
-                minWidth: "140px",
-                maxWidth: "100%",
-                flex: "1 1 140px",
-              }}
+              className="text-[13px] px-[10px] py-[5px] rounded-lg min-w-[140px] max-w-full flex-1 basis-[140px] border border-gray-300 bg-white"
             >
               <option value="">Tous les types</option>
               {availableTypes.map((t) => (
@@ -524,14 +427,7 @@ export default function ApartmentTable() {
             <select
               value={filterFloor}
               onChange={(e) => setFilterFloor(e.target.value)}
-              style={{ 
-                fontSize: 13, 
-                padding: "5px 10px", 
-                borderRadius: 8, 
-                minWidth: "120px",
-                maxWidth: "100%",
-                flex: "1 1 120px",
-              }}
+              className="text-[13px] px-[10px] py-[5px] rounded-lg min-w-[120px] max-w-full flex-1 basis-[120px] border border-gray-300 bg-white"
             >
               <option value="">Tous les étages</option>
               {availableFloors.map((f) => (
@@ -541,17 +437,7 @@ export default function ApartmentTable() {
             {(filterType || filterFloor) && (
               <button
                 onClick={() => { setFilterType(""); setFilterFloor(""); }}
-                style={{
-                  padding: "5px 12px", 
-                  fontSize: 12, 
-                  borderRadius: 8,
-                  border: "0.5px solid var(--color-border-secondary)",
-                  background: "none", 
-                  color: "var(--color-text-secondary)", 
-                  cursor: "pointer",
-                  whiteSpace: "nowrap",
-                  flexShrink: 0,
-                }}
+                className="px-3 py-[5px] text-[12px] rounded-lg border border-gray-300 bg-none text-gray-600 cursor-pointer whitespace-nowrap flex-shrink-0 hover:bg-gray-100 transition-colors"
               >
                 Réinitialiser
               </button>
