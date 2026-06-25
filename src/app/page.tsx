@@ -2,10 +2,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useRef, useState, useEffect, useCallback } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import PartnerCarousel from "@/components/PartnerCarousel";
+import AmenitiesCarousel from "@/components/AmenitiesCarousel";
 import {
   slideLeft,
   slideRight,
@@ -129,6 +130,119 @@ export default function HomePage() {
   const { scrollY } = useScroll();
   const heroY = useTransform(scrollY, [0, 700], [0, 120]);
   const heroOpacity = useTransform(scrollY, [0, 500], [1, 0]);
+
+  // ─── Amenities Carousel State ───
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [itemsPerView, setItemsPerView] = useState(3);
+  const [direction, setDirection] = useState(0); // -1 for left, 1 for right
+
+  // Update items per view based on screen size
+  useEffect(() => {
+    const updateItemsPerView = () => {
+      if (window.innerWidth < 768) {
+        setItemsPerView(1);
+      } else if (window.innerWidth < 1024) {
+        setItemsPerView(2);
+      } else {
+        setItemsPerView(3);
+      }
+    };
+    
+    updateItemsPerView();
+    window.addEventListener('resize', updateItemsPerView);
+    return () => window.removeEventListener('resize', updateItemsPerView);
+  }, []);
+
+  const totalSlides = Math.ceil(amenities.length / itemsPerView);
+  const maxIndex = Math.max(0, totalSlides - 1);
+
+  const nextSlide = () => {
+    setDirection(1);
+    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+  };
+
+  const prevSlide = () => {
+    setDirection(-1);
+    setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
+  };
+
+  // Get visible items for current slide
+  const getVisibleItems = () => {
+    const start = currentIndex * itemsPerView;
+    const end = start + itemsPerView;
+    return amenities.slice(start, end);
+  };
+
+  const visibleItems = getVisibleItems();
+
+  // Slide variants for smooth transitions
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 300 : -300,
+      opacity: 0,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+        ease: [0.22, 1, 0.36, 1],
+      }
+    },
+    exit: (direction: number) => ({
+      x: direction > 0 ? -300 : 300,
+      opacity: 0,
+      transition: {
+        duration: 0.4,
+        ease: [0.22, 1, 0.36, 1],
+      }
+    })
+  };
+
+  // Stagger children for individual card animation
+  const containerVariants = {
+    enter: {
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.1,
+      }
+    },
+    center: {
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.1,
+      }
+    },
+    exit: {
+      transition: {
+        staggerChildren: 0.05,
+        staggerDirection: -1,
+      }
+    }
+  };
+
+  const cardVariants = {
+    enter: {
+      opacity: 0,
+      y: 30,
+    },
+    center: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: [0.22, 1, 0.36, 1],
+      }
+    },
+    exit: {
+      opacity: 0,
+      y: -30,
+      transition: {
+        duration: 0.3,
+        ease: [0.22, 1, 0.36, 1],
+      }
+    }
+  };
 
   return (
     <>
@@ -375,7 +489,7 @@ export default function HomePage() {
               return (
                 <motion.div
                   key={v.title}
-                  variants={staggerContainer} // using stagger for entrance
+                  variants={staggerContainer}
                   custom={i}
                   className="group relative rounded-xl p-[2px]"
                   whileHover={{ y: -6 }}
@@ -441,114 +555,8 @@ export default function HomePage() {
           </motion.div>
         </div>
       </section>
-
-      {/* ── AMENITIES (cards now fly in from all directions) ── */}
-      <section className="py-28 bg-stone-50">
-        <div className="max-w-7xl mx-auto px-8">
-          <div className="mb-14">
-            <Reveal>
-              <p className="text-[#AB7A51] text-[11px] uppercase tracking-[0.3em] font-semibold mb-4">
-                Services & Équipements
-              </p>
-              <h2
-                style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
-                className="text-4xl md:text-5xl font-light text-stone-900 leading-tight max-w-xl"
-              >
-                Un art de vivre<br />
-                <em className="not-italic text-[#C49572]">
-                  pensé dans ses moindres détails.
-                </em>
-              </h2>
-            </Reveal>
-          </div>
-
-          {/* First row (3 cards) */}
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-4"
-          >
-            {amenities.slice(0, 3).map((a, i) => (
-              <motion.div
-                key={a.label}
-                variants={amenityDirection}
-                custom={i}
-                className="group relative overflow-hidden cursor-pointer"
-                whileHover={{ y: -4 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="relative h-72 overflow-hidden">
-                  <Image
-                    src={a.img}
-                    alt={a.label}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                  <motion.div
-                    className="absolute top-0 left-0 right-0 h-0.5 bg-[#4F9BFF] origin-left"
-                    initial={{ scaleX: 0 }}
-                    whileInView={{ scaleX: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: i * 0.12 + 0.2 }}
-                  />
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-5">
-                  <p className="text-[#4F9BFF] text-[10px] uppercase tracking-widest font-semibold mb-1">
-                    {a.label}
-                  </p>
-                  <p className="text-white text-sm leading-snug">{a.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {/* Second row (2 cards, centered) – continued indices: 3 & 4 */}
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
-            className="grid grid-cols-1 md:grid-cols-2 md:w-2/3 md:mx-auto gap-4 mt-4"
-          >
-            {amenities.slice(3, 5).map((a, i) => (
-              <motion.div
-                key={a.label}
-                variants={amenityDirection}
-                custom={i + 3} // indices 3 and 4
-                className="group relative overflow-hidden cursor-pointer"
-                whileHover={{ y: -4 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="relative h-72 overflow-hidden">
-                  <Image
-                    src={a.img}
-                    alt={a.label}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                  <motion.div
-                    className="absolute top-0 left-0 right-0 h-0.5 bg-[#4F9BFF] origin-left"
-                    initial={{ scaleX: 0 }}
-                    whileInView={{ scaleX: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: (i + 3) * 0.12 + 0.2 }}
-                  />
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-5">
-                  <p className="text-[#4F9BFF] text-[10px] uppercase tracking-widest font-semibold mb-1">
-                    {a.label}
-                  </p>
-                  <p className="text-white text-sm leading-snug">{a.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
+            {/* ── AMENITIES CAROUSEL ── */}
+      <AmenitiesCarousel items={amenities} itemsPerView={itemsPerView} />
 
       {/* PARTNERS CAROUSEL */}
       <PartnerCarousel />
