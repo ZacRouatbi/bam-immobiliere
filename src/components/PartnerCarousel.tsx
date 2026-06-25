@@ -19,9 +19,7 @@ export default function PartnerCarousel() {
     <div className="overflow-hidden bg-white py-16 border-y border-stone-100">
       <div className="max-w-7xl mx-auto px-8 mb-10">
         <p className="text-[#AB7A51] text-[11px] uppercase tracking-[0.3em] font-semibold mb-3">Nos Partenaires</p>
-        <h3 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }} className="text-3xl md:text-4xl font-light text-stone-900">
-          Ils nous font confiance.
-        </h3>
+      
       </div>
       <div className="relative">
         <motion.div

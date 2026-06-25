@@ -315,7 +315,7 @@ export default function HomePage() {
               transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
             >
               <Image
-                src="/images/rendu-04.png"
+                src="/Homepg.jpg"
                 alt="Vision"
                 fill
                 className="object-cover"
