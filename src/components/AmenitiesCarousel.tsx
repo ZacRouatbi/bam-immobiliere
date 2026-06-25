@@ -75,31 +75,31 @@ export default function AmenitiesCarousel() {
     }
   };
 
-  // Individual card variants
-  const cardVariants = {
-    hidden: (direction: number) => ({
-      x: direction > 0 ? 80 : -80,
-      opacity: 0,
-    }),
-    visible: {
-      x: 0,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 300,
-        damping: 25,
-        duration: 0.5,
-      }
-    },
-    exit: (direction: number) => ({
-      x: direction > 0 ? -80 : 80,
-      opacity: 0,
-      transition: {
-        duration: 0.3,
-        ease: [0.22, 1, 0.36, 1],
-      }
-    })
-  };
+// Individual card variants
+   const cardVariants = {
+     hidden: (direction: number) => ({
+       x: direction > 0 ? 80 : -80,
+       opacity: 0,
+     }),
+     visible: {
+       x: 0,
+       opacity: 1,
+       transition: {
+         type: "spring" as const,
+         stiffness: 300,
+         damping: 25,
+         duration: 0.5,
+       }
+     },
+     exit: (direction: number) => ({
+       x: direction > 0 ? -80 : 80,
+       opacity: 0,
+       transition: {
+         duration: 0.3,
+         ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+       }
+     })
+   };
 
   return (
     <section className="py-28 bg-stone-50 overflow-hidden">

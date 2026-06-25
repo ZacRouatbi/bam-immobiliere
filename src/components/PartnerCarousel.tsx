@@ -2,11 +2,10 @@
 import { motion } from "framer-motion";
 
 const partners = [
-  { name: "Osmose", logo: "/partners/Osmose.png" },
+  { name: "Atelier Osmose", logo: "/partners/Osmose.png" },
   { name: "ESSID", logo: "/partners/ESSID.png" },
   { name: "Tunisie Contrôle", logo: "/partners/TunisieControl.png" },
   { name: "Société Works & Construction", logo: "/Construction.png" },
-  { name: "Atelier Osmore", logo: "/Architecture.png" },
   { name: "Sofiane Fayala", logo: "/logo_bam.png" },
   { name: "Soheil Ben Nejma", logo: "/logo_bam.png" },
 ];
@@ -41,7 +40,7 @@ export default function PartnerCarousel() {
               className="flex-shrink-0 flex flex-col items-center justify-center h-28 w-60 border-r border-stone-100 last:border-r-0"
             >
               <div className="flex flex-col items-center justify-center opacity-60 hover:opacity-100 transition-opacity duration-300">
-                {p.logo && <img src={p.logo} alt={p.name} className="max-h-16 max-w-full object-contain mb-2" />}
+                {p.logo && <img src={p.logo} alt={p.name} className="max-h-30 max-w-full object-contain mb-2" />}
                 <span className="text-stone-400 text-[10px] font-semibold uppercase tracking-wider">{p.name}</span>
               </div>
             </div>

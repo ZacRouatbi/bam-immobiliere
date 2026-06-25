@@ -17,14 +17,6 @@ import {
 } from "@/lib/motion";
 import { Award, Target, Heart, Users } from "lucide-react";
 
-const amenities = [
-  { img: "/Construction.png", label: "Construction", desc: "Gros œuvre et travaux de construction avec des matériaux de haute qualité." },
-  { img: "/Architecture.png", label: "Architecture", desc: "Conception architecturale sur mesure pour des espaces uniques et fonctionnels." },
-  { img: "/Promotion immobiliére.png", label: "Promotion Immobilière", desc: "Promotion et vente de biens immobiliers neufs et résidentiels." },
-  { img: "/Gestion et conseil.png", label: "Gestion & Conseil", desc: "Conseil en gestion immobilière et optimisation de votre patrimoine." },
-  { img: "/Livraison clé a main.png", label: "Livraison Clé en Main", desc: "Livraison complète et prête à l'emménagement de vos espaces." },
-];
-
 const stats = [
   { n: "+150", l: "Projets Réalisés" },
   { n: "+20",  l: "Ans d'Expérience" },
@@ -38,33 +30,6 @@ const values = [
   { icon: Target, title: "Engagement",   desc: "Nous nous engageons pleinement pour la réussite de vos projets, dans les délais et budgets convenus." },
   { icon: Users,  title: "Collaboration", desc: "Nous travaillons main dans la main avec nos clients pour construire des espaces qui leur ressemblent." },
 ];
-
-/* ─── Variant for amenity cards: each flies in from a different direction ─── */
-const amenityDirection = {
-  hidden: (i: number) => {
-    // Directions: 0=left, 1=top, 2=right, 3=bottom-left, 4=bottom-right
-    const directions = [
-      { x: -300, y: 0 },    // left
-      { x: 0, y: -200 },    // top
-      { x: 300, y: 0 },     // right
-      { x: -200, y: 200 },  // bottom-left
-      { x: 200, y: 200 },   // bottom-right
-    ];
-    const pos = directions[i] || { x: 0, y: 100 };
-    return { opacity: 0, x: pos.x, y: pos.y };
-  },
-  visible: {
-    opacity: 1,
-    x: 0,
-    y: 0,
-    transition: {
-      type: "spring",
-      stiffness: 100,
-      damping: 15,
-      duration: 0.8,
-    },
-  },
-};
 
 /* ─── Live count‑up component ─── */
 function CountUpNumber({
@@ -130,119 +95,6 @@ export default function HomePage() {
   const { scrollY } = useScroll();
   const heroY = useTransform(scrollY, [0, 700], [0, 120]);
   const heroOpacity = useTransform(scrollY, [0, 500], [1, 0]);
-
-  // ─── Amenities Carousel State ───
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [itemsPerView, setItemsPerView] = useState(3);
-  const [direction, setDirection] = useState(0); // -1 for left, 1 for right
-
-  // Update items per view based on screen size
-  useEffect(() => {
-    const updateItemsPerView = () => {
-      if (window.innerWidth < 768) {
-        setItemsPerView(1);
-      } else if (window.innerWidth < 1024) {
-        setItemsPerView(2);
-      } else {
-        setItemsPerView(3);
-      }
-    };
-    
-    updateItemsPerView();
-    window.addEventListener('resize', updateItemsPerView);
-    return () => window.removeEventListener('resize', updateItemsPerView);
-  }, []);
-
-  const totalSlides = Math.ceil(amenities.length / itemsPerView);
-  const maxIndex = Math.max(0, totalSlides - 1);
-
-  const nextSlide = () => {
-    setDirection(1);
-    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
-  };
-
-  const prevSlide = () => {
-    setDirection(-1);
-    setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
-  };
-
-  // Get visible items for current slide
-  const getVisibleItems = () => {
-    const start = currentIndex * itemsPerView;
-    const end = start + itemsPerView;
-    return amenities.slice(start, end);
-  };
-
-  const visibleItems = getVisibleItems();
-
-  // Slide variants for smooth transitions
-  const slideVariants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? 300 : -300,
-      opacity: 0,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.5,
-        ease: [0.22, 1, 0.36, 1],
-      }
-    },
-    exit: (direction: number) => ({
-      x: direction > 0 ? -300 : 300,
-      opacity: 0,
-      transition: {
-        duration: 0.4,
-        ease: [0.22, 1, 0.36, 1],
-      }
-    })
-  };
-
-  // Stagger children for individual card animation
-  const containerVariants = {
-    enter: {
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.1,
-      }
-    },
-    center: {
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.1,
-      }
-    },
-    exit: {
-      transition: {
-        staggerChildren: 0.05,
-        staggerDirection: -1,
-      }
-    }
-  };
-
-  const cardVariants = {
-    enter: {
-      opacity: 0,
-      y: 30,
-    },
-    center: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: [0.22, 1, 0.36, 1],
-      }
-    },
-    exit: {
-      opacity: 0,
-      y: -30,
-      transition: {
-        duration: 0.3,
-        ease: [0.22, 1, 0.36, 1],
-      }
-    }
-  };
 
   return (
     <>
@@ -555,8 +407,8 @@ export default function HomePage() {
           </motion.div>
         </div>
       </section>
-            {/* ── AMENITIES CAROUSEL ── */}
-      <AmenitiesCarousel items={amenities} itemsPerView={itemsPerView} />
+{/* ── AMENITIES CAROUSEL ── */}
+       <AmenitiesCarousel />
 
       {/* PARTNERS CAROUSEL */}
       <PartnerCarousel />
