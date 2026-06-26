@@ -130,7 +130,7 @@ export default function ResidenceProjectsPage({
                 <div className="absolute bottom-0 right-0 w-12 h-12 border-b-2 border-r-2 border-[#AB7A51] rounded-br-2xl z-10" />
 
                 <video
-                  src="/vidbam.mp4"
+                  src="/vidBam.mp4"
                   autoPlay
                   muted
                   loop

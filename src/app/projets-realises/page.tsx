@@ -8,7 +8,7 @@ const residences = [
   {
     name: "Résidence Gloria",
     slug: "residence-gloria",
-    img: "/images/top-view-02.jpg",
+    img: "/Gloria/Gloria.png",
     description: "Projet réalisé — Résidence Gloria"
   }
 ];

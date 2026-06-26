@@ -5,9 +5,9 @@ const partners = [
   { name: "Atelier Osmose", logo: "/partners/Osmose.png" },
   { name: "ESSID", logo: "/partners/ESSID.png" },
   { name: "Tunisie Contrôle", logo: "/partners/TunisieControl.png" },
-  { name: "Société Works & Construction", logo: "/Construction.png" },
-  { name: "Sofiane Fayala", logo: "/logo_bam.png" },
-  { name: "Soheil Ben Nejma", logo: "/logo_bam.png" },
+  { name: "Société Works & Construction", logo: "/partners/Societeworks.png" },
+  { name: "Sofiane Fayala", logo: "/partners/SofianeFayala.png" },
+  { name: "Soheil Ben Nejma", logo: "/partners/BureauEnergy.png" },
 ];
 
 export default function PartnerCarousel() {
